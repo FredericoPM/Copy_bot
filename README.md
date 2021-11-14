@@ -1,5 +1,5 @@
 # Copy_bot
-
-biblioteca discord: pip install discord.py-self (https://pypi.org/project/discord.py-self/)
-
-dotenv: pip install python-dotenv
+Instalação
+    pip install discord.py-self (https://pypi.org/project/discord.py-self/)
+    pip install python-dotenv
+    pip install requests

@@ -1,0 +1,10 @@
+{
+    "Servers": [
+        {
+            "server_name": "Bots", 
+            "chanels": [
+                {"chanel_name": "chat_teste"}
+            ]
+        }
+    ]
+}
