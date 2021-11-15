@@ -41,15 +41,25 @@ class CopyBot(discord.Client):
                         break
                 break
 
+        print("====================================================================")
         print(message)
+        print(message.channel.name)
+        print(message.guild.name)
+        print(message.embeds)
+        print(message.content)
+        for emb in message.embeds:
+            print(emb.description)
+            print(emb.footer)
+        print("====================================================================")
         
         if(flag):
-            if(len(message.content) != 0):
-                print("Mensage content: " + message.content)
-                self._tele_bot.send_message(self._test_serve_id, message.content)
-                for server in self._server_list:
-                    self._tele_bot.send_message(server, message.content)
-
+            for server in self._server_list:
+                if(len(message.content) != 0):              
+                        self._tele_bot.send_message(server, message.content)
+                for emb in message.embeds:
+                    if(len(emb.description) != 0):
+                        self._tele_bot.send_message(server, emb.description)
+            
             if(len(message.attachments) != 0):
                 print(message.attachments)
                 for intem in message.attachments:
@@ -65,6 +75,21 @@ class CopyBot(discord.Client):
                             img.close()
                         except Exception as e:
                             print(e)
+
+                
+
+        if(True):
+            self._tele_bot.send_message(self._test_serve_id, message.content)
+            for intem in message.attachments:
+                if(".png" in intem.url or ".jpg" in intem.url):
+                    try:
+                        img = await self._read_img_url(intem.url)
+                        self._tele_bot.send_photo(self._test_serve_id, img)
+                        img.close()
+                    except Exception as e:
+                        print(e)
+            for emb in message.embeds:
+                self._tele_bot.send_message(self._test_serve_id, emb.description)
 
     async def on_ready(self):
         print("Connected")
