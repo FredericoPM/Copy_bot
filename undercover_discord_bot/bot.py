@@ -36,7 +36,7 @@ class CopyBot(discord.Client):
                         self._tele_bot.send_message(server, message.content)
 
         for emb in message.embeds:
-            if(len(emb.description) != 0 and type(emb.image)  != '_EmptyEmbed' and (".png" in emb.image.url or ".jpg" in emb.image.url)):
+            if(len(emb.description) != 0 and emb.image.url != discord.Embed.Empty and (".png" in emb.image.url or ".jpg" in emb.image.url)):
                 try:
                     img = await self._read_img_url(emb.image.url)
                     self._tele_bot.send_photo(self._test_serve_id, img, caption=emb.description)
@@ -45,7 +45,7 @@ class CopyBot(discord.Client):
                     print(e)
             elif(len(emb.description) != 0):
                 self._tele_bot.send_message(server, emb.description)
-            elif(type(emb.image)  != '_EmptyEmbed' and (".png" in emb.image.url or ".jpg" in emb.image.url)):
+            elif(emb.image.url != discord.Embed.Empty and (".png" in emb.image.url or ".jpg" in emb.image.url)):
                 try:
                     img = await self._read_img_url(emb.image.url)
                     self._tele_bot.send_photo(self._test_serve_id, img)
@@ -81,7 +81,7 @@ class CopyBot(discord.Client):
                 except Exception as e:
                     print(e)
         for emb in message.embeds:
-            if(len(emb.description) != 0 and type(emb.image) != '_EmptyEmbed' and (".png" in emb.image.url or ".jpg" in emb.image.url)):
+            if(len(emb.description) != 0 and emb.image.url != discord.Embed.Empty and (".png" in emb.image.url or ".jpg" in emb.image.url)):
                 try:
                     img = await self._read_img_url(emb.image.url)
                     self._tele_bot.send_photo(self._test_serve_id, img, caption = emb.description)
@@ -90,7 +90,7 @@ class CopyBot(discord.Client):
                     print(e)
             elif(len(emb.description) != 0):
                 self._tele_bot.send_message(self._test_serve_id, emb.description)
-            elif(type(emb.image) != '_EmptyEmbed' and (".png" in emb.image.url or ".jpg" in emb.image.url)):
+            elif(emb.image.url != discord.Embed.Empty and (".png" in emb.image.url or ".jpg" in emb.image.url)):
                 try:
                     img = await self._read_img_url(emb.image.url)
                     self._tele_bot.send_photo(self._test_serve_id, img, caption = "teste")
@@ -118,7 +118,7 @@ class CopyBot(discord.Client):
         print(message.content)
         for emb in message.embeds:
             print(emb.description)
-            print(emb.image.url)
+            print(emb.image)
         print("====================================================================")
         
         if(flag):
