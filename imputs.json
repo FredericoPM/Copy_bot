@@ -1,9 +1,11 @@
 {
     "Servers": [
         {
-            "server_name": "Bots", 
+            "server_name": "EM-Predictions", 
             "chanels": [
-                {"chanel_name": "chat_teste"}
+                {"chanel_name": "russian-insiders"},
+                {"chanel_name": "binance-killers"},
+                {"chanel_name": "bitcoin-bullets"}
             ]
         }
     ]
