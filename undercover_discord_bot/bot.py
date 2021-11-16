@@ -8,19 +8,14 @@ from dotenv import load_dotenv
 from telebot.types import File
 
 class CopyBot(discord.Client):
-    def __init__(self, test_server_tg, test_server_ds, telegran_api, input_servers_file, copy_server_ds, server_list = [], *, loop=None, **options):
+    def __init__(self, test_server_tg, test_server_ds, telegran_api, copy_server_ds, input_servers = [], server_list = [], *, loop=None, **options):
         super().__init__(loop=loop, **options)
         self._tele_bot = telebot.TeleBot(telegran_api)
         self._test_server_tg = int(test_server_tg)
         self._test_server_ds = int(test_server_ds)
         self._copy_server_ds = copy_server_ds
         self._server_list = server_list if len(server_list[0]) != 0 else []
-        try:
-            with open(input_servers_file, "r") as read_file:
-                self._imput_servers = json.load(read_file)
-        except Exception as e:
-            print(e)
-            self._imput_servers = {"Servers" : []}
+        self._input_servers = input_servers
 
     async def _read_img_url(self, url):
         r = requests.get(url, stream=True)
@@ -112,16 +107,13 @@ class CopyBot(discord.Client):
                     print(e)
 
     async def on_message(self, message): 
-        flag = len(self._imput_servers['Servers']) == 0
+        flag = False
 
-        for server in self._imput_servers['Servers']:
-            if(message.guild.name == server['server_name']):
-                for chanel in server['chanels']:
-                    if(message.channel.name == chanel['chanel_name']):
-                        flag = True
-                        break
+        for server in self._input_servers:
+            if(message.channel.id == server):
+                flag = True
                 break
-
+        
         print("====================================================================")
         print(message.channel.name)
         print(message.guild.name)
@@ -150,6 +142,6 @@ copyBot = CopyBot(
     test_server_ds = os.getenv('TEST_SERVER_DS'),
     copy_server_ds = os.getenv('COPY_SERVER_DS'),
     server_list = os.getenv('SERVER_LIST').split(';'),
-    input_servers_file = "./imputs.json"
+    input_servers = os.getenv('INPUT_SERVERS').split(';')
 )
 copyBot.run(os.getenv('DISCORD_TOKEN'))
