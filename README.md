@@ -10,6 +10,7 @@ Instalação undercover_bot:
     pip install requests
     
 Instalação discord_bot:
+
     npm install discord.js
     
     npm install dotenv
