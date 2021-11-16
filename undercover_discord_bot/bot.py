@@ -134,10 +134,11 @@ class CopyBot(discord.Client):
         if(flag):
             await self._send_message_to_tg_servers(message, self._server_list)
             await self._send_message_to_disc_server(message, self._copy_server_ds)
-        if(message.channel.id != self._test_server_ds):
-            await self._send_message_to_tg_servers(message, [self._test_server_tg])
-        if(message.channel.id != self._test_server_ds and message.channel.id != self._copy_server_ds):
-            await self._send_message_to_disc_server(message, self._test_server_ds)
+        if(message.guild.name == "Bots"):
+            if(message.channel.id != self._test_server_ds):
+                await self._send_message_to_tg_servers(message, [self._test_server_tg])
+            if(message.channel.id != self._test_server_ds and message.channel.id != self._copy_server_ds):
+                await self._send_message_to_disc_server(message, self._test_server_ds)
 
     async def on_ready(self):
         print("Connected")
