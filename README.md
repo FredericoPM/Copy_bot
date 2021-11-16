@@ -1,5 +1,6 @@
 # Copy_bot
 Instalação undercover_bot:
+
     pip install discord.py-self (https://pypi.org/project/discord.py-self/)
     
     pip install python-dotenv
