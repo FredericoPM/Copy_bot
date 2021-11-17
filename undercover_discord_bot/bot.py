@@ -66,7 +66,7 @@ class CopyBot(discord.Client):
                         print(e)
 
     async def _send_message_to_disc_server(self, message, channel_id):
-        channel = self.get_channel(channel_id)
+        channel = self.get_channel(int(channel_id))
         if(len(message.content) != 0 and len(message.attachments) != 0):
             for intem in message.attachments:
                 if(".png" in intem.url or ".jpg" in intem.url):
@@ -110,10 +110,10 @@ class CopyBot(discord.Client):
         flag = False
 
         for server in self._input_servers:
-            if(message.channel.id == server):
+            if(message.channel.id == int(server)):
                 flag = True
                 break
-        
+    
         print("====================================================================")
         print(message.channel.name)
         print(message.guild.name)
